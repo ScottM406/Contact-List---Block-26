@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import ContactRow from "./ContactRow.jsx";
+import SingleContact from "./SingleContact.jsx";
+import "../index.css"
 
 const dummyContacts = [
   { id: 1, name: "R2-D2", phone: "222-222-2222", email: "r2d2@droids.com" },
@@ -10,6 +12,7 @@ const dummyContacts = [
 
 const ContactList = () => {
   const [contacts, setContacts] = useState(dummyContacts);
+  const [singleContact, setSingleContact] = useState(null);
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -26,25 +29,31 @@ const ContactList = () => {
 },[]);
 
   return (
-  <table>
-    <thead>
-      <tr>
-       <th colSpan="3">Contact List</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-      </tr>
-      {contacts.map((contact) => {
-        return<ContactRow key={contact.id} contact={contact} />;
-      })}
-    </tbody>
-    <tfoot>
-    </tfoot>
-  </table>
+    <>
+    <table id="list">
+      <thead>
+        <tr>
+        <th colSpan="3">Contact List</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+        </tr>
+        {contacts.map((contact) => {
+          return<ContactRow key={contact.id} contac={contact} onClick={() => setSingleContact(contact)} />;
+          //NOTE THAT "CONTAC" IS PROPS - IT IS BEING PASSED TO CONTACT ROW!!!!
+        })}
+      </tbody>
+      <tfoot>
+      </tfoot>
+    </table>
+    <div id="single">
+    {singleContact && <SingleContact contact={singleContact} />}
+    </div>
+    </>
   )
 }
 

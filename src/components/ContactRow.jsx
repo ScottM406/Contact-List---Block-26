@@ -1,13 +1,13 @@
-const ContactRow = ( {contact} ) => {
+import React from "react";
+
+const ContactRow = ( {contac, onClick} ) => {
   return (
-    <tr>
-      <td>{contact.name}</td>
-      <td>{contact.phone}</td>
-      <td>{contact.email}</td>
+    <tr onClick={onClick}>
+      <td>{contac.name}</td>
+      <td>{contac.phone}</td>
+      <td>{contac.email}</td>
     </tr>
   );
 };
-
-// YOU ARE CURRENTLY ON STEP 13 OF 'SETTING UP A TABLE'
 
 export default ContactRow;
